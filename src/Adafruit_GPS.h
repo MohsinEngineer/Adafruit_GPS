@@ -281,7 +281,7 @@ private:
   bool paused;
 
   uint8_t parseResponse(char *response);
-#if (defined(__AVR__) || defined(ESP8266)) && defined(USE_SW_SERIAL)
+#if defined(USE_SW_SERIAL)
   SoftwareSerial *gpsSwSerial;
 #endif
   bool noComms = false;
