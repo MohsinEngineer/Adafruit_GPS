@@ -146,7 +146,7 @@ static bool strStartsWith(const char *str, const char *prefix);
 */
 /**************************************************************************/
 bool Adafruit_GPS::begin(uint32_t baud_or_i2caddr) {
-#if (defined(__AVR__) || defined(ESP8266)) && defined(USE_SW_SERIAL)
+#if defined(USE_SW_SERIAL)
   if (gpsSwSerial) {
     gpsSwSerial->begin(baud_or_i2caddr);
   }
@@ -184,7 +184,7 @@ bool Adafruit_GPS::begin(uint32_t baud_or_i2caddr) {
     @param ser Pointer to SoftwareSerial device
 */
 /**************************************************************************/
-#if (defined(__AVR__) || defined(ESP8266)) && defined(USE_SW_SERIAL)
+#if defined(USE_SW_SERIAL)
 Adafruit_GPS::Adafruit_GPS(SoftwareSerial *ser) {
   common_init();     // Set everything to common state, then...
   gpsSwSerial = ser; // ...override gpsSwSerial with value passed.
@@ -242,7 +242,7 @@ Adafruit_GPS::Adafruit_GPS() {
 */
 /**************************************************************************/
 void Adafruit_GPS::common_init(void) {
-#if (defined(__AVR__) || defined(ESP8266)) && defined(USE_SW_SERIAL)
+#if defined(USE_SW_SERIAL)
   gpsSwSerial = NULL; // Set both to NULL, then override correct
 #endif
   gpsHwSerial = NULL; // port pointer in corresponding constructor
@@ -290,7 +290,7 @@ size_t Adafruit_GPS::available(void) {
   if (paused)
     return 0;
 
-#if (defined(__AVR__) || defined(ESP8266)) && defined(USE_SW_SERIAL)
+#if defined(USE_SW_SERIAL)
   if (gpsSwSerial) {
     return gpsSwSerial->available();
   }
@@ -314,7 +314,7 @@ size_t Adafruit_GPS::available(void) {
 */
 /**************************************************************************/
 size_t Adafruit_GPS::write(uint8_t c) {
-#if (defined(__AVR__) || defined(ESP8266)) && defined(USE_SW_SERIAL)
+#if defined(USE_SW_SERIAL)
   if (gpsSwSerial) {
     return gpsSwSerial->write(c);
   }
@@ -367,7 +367,7 @@ char Adafruit_GPS::read(void) {
   if (paused || noComms)
     return c;
 
-#if (defined(__AVR__) || defined(ESP8266)) && defined(USE_SW_SERIAL)
+#if defined(USE_SW_SERIAL)
   if (gpsSwSerial) {
     if (!gpsSwSerial->available())
       return c;
