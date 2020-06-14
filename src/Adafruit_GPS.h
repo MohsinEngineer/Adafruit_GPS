@@ -54,7 +54,7 @@
   3 ///< maximum length of a source ID name, including terminating 0
 
 #include "Arduino.h"
-#if (defined(__AVR__) || defined(ESP8266)) && defined(USE_SW_SERIAL)
+#if defined(USE_SW_SERIAL)
 #include <SoftwareSerial.h>
 #endif
 #include <Adafruit_PMTK.h>
@@ -83,7 +83,7 @@ public:
   // Adafruit_GPS.cpp
   bool begin(uint32_t baud_or_i2caddr);
 
-#if (defined(__AVR__) || defined(ESP8266)) && defined(USE_SW_SERIAL)
+#if defined(USE_SW_SERIAL)
   Adafruit_GPS(SoftwareSerial *ser); // Constructor when using SoftwareSerial
 #endif
   Adafruit_GPS(HardwareSerial *ser); // Constructor when using HardwareSerial
